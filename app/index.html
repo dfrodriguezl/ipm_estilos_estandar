@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Geovisor Estimaciones IPM</title>
+
+  <link rel="icon" href="https://geoportal.dane.gov.co/src/images/general/GEOPORTAL-DANE-favicon-32x32.png">
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+    <meta name='viewport' 
+    content='width=device-width, initial-scale=1.0, maximum-scale=1.0, 
+    user-scalable=0' >
+
+    <link rel="stylesheet" href="https://geoportal.dane.gov.co/src/styles/geoportalfonts.min.css">
+
+</head>
+
+<body>
+
+  <div id="popup" class="ol-popup">
+    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+    <div id="popup-content"></div>
+  </div>
+
+  
+  <div id="contenedor">
+    <div class="modal" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true" id="modal1">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title w-100 text-center">Geovisor de grupos por niveles de vulnerabilidad</h5>
+            <button type="button" class="close" data-dismiss="modal" id="close1" aria-label="Close">
+              <span aria-hidden="true">X</span>
+            </button>
+          </div>
+          <div class="modal-body">
+    
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item tab tab-active" id="rapida__1">
+                <a class="nav-link tab-text" data-toggle="tab" role="tab" id="rapida" aria-controls="guide"><i class="fa fa-bars"></i>
+                  Guía rápida</a>
+              </li>
+              <li class="nav-item tab" id="acerca__1">
+                <a class="nav-link tab-text" data-toggle="tab" role="tab" id="acerca" aria-controls="messages"><i
+                    class="fas fa-info"></i> Acerca de</a>
+              </li>
+              <li class="nav-item tab" id="contacto__1">
+                <a class="nav-link tab-text" data-toggle="tab" role="tab" id="contacto" aria-controls="settings"><i
+                    class="fas fa-user"></i> Contáctenos</a>
+              </li>
+            </ul>
+    
+            <div class="tab-content">    
+              <div class="tab-pane tab-visible" id="guide" role="tabpanel">
+                <img id="img" src="https://geoportal.dane.gov.co/descargas/ayudas/ayuda-geovisor-vulnerabilidad.webp" />
+              </div>
+              <div class="tab-pane" id="messages" role="tabpanel">
+                <p class="help__content__text">
+                <div class="row">
+                  <div class="col ">
+                    <p class="help__content__text" itemprop="description">                      
+                    Geovisor para la consulta de los resultados asociados a la predicción del índice de pobreza muldimensional (IPM).
+                    </p>
+                  </div>
+                </div>
+                </p>
+              </div>
+              <div class="tab-pane" id="settings" role="tabpanel">
+                <p class="help__content__text" itemprop="description">
+                  Envíe su consulta por correo electrónico o tramite su petición, queja, reclamo, sugerencia o denuncia en
+                  el formulario DANE
+                </p>
+                <p class="help__content__text" itemprop="description">
+                  Ventanilla única de PQRSD, <a class="help__panelItem__textBold"
+                    href="https://www.dane.gov.co/index.php/ventanilla-unica/pqr-s" target="_blank">Página PQRSD</a>
+                </p>
+                <p class="help__content__text" itemprop="description">
+                  contacto@dane.gov.co
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="header">
+      <nav role="navigation">
+        <div id="menuToggle">
+          <!--
+          A fake / hidden checkbox is used as click reciever,
+          so you can use the :checked selector on it.
+          -->
+          
+            <input type="checkbox" id="ham" />
+          
+          <!--
+          Some spans to act as a hamburger.
+          
+          They are acting like a real hamburger,
+          not that McDonalds stuff.
+          -->
+          <span class="men"></span>
+          <span class="men"></span>
+          <span class="men"></span>
+          <span class="navBar__collapseBtn__triangle"></span>
+          
+          
+          <!--
+          Too bad the menu has to be inside of the button
+          but hey, it's pure CSS magic.
+          -->
+          <ul id="menu">
+            
+            <div class="ventana">
+
+              <div class="rownavbar container-toolbar">
+                <div class="col-3 container-tool" id="ayuda">
+                  <div class="round-tool">
+                    <img src="./img/DANE__Geovisor__icon__ask.svg" style="cursor: pointer;" width="20" height="20" alt="icono-consultas" class="icon-tool">
+                    <img src="./img/DANE__Geovisor__icon__ask_selected.svg" style="cursor: pointer;" width="20" height="20" alt="icono-consultas-seleccionada" class="icon-tool-selected">                    
+                  </div>
+                  <p class="center">Ayuda</p>
+                </div>
+                <div class="col-3 container-tool container-tool" id="ubicacion">
+                  <div class="round-tool">
+                      <img src="./img/DANE__Geovisor__icon__searchGeo.svg" style="cursor: pointer;" width="20" height="20" alt="icono-consultas" class="icon-tool">
+                      <img src="./img/DANE__Geovisor__icon__searchGeo_selected.svg" style="cursor: pointer;" width="20" height="20" alt="icono-consultas-seleccionada" class="icon-tool-selected">  
+                  </div>        
+                  <p class="center">ubicación</p>
+                </div>
+                <div class="col-3 container-tool container-tool-active" id="consultas">
+                  <div class="round-tool">
+                      <img src="./img/DANE__Geovisor__icon__searchTheme.svg" style="cursor: pointer;" width="20" height="20" alt="icono-consultas" class="icon-tool">
+                      <img src="./img/DANE__Geovisor__icon__searchTheme_selected.svg" style="cursor: pointer;" width="20" height="20" alt="icono-consultas-seleccionada" class="icon-tool-selected">  
+                  </div>
+                  <p class="center">Temas</p>
+                </div>
+                <div class="col-3 container-tool" id="mapas-base">
+                  <div class="round-tool">
+                    <img src="./img/DANE__Geovisor__icon__settings.svg" style="cursor: pointer;" width="20" height="20" alt="icono-consultas" class="icon-tool">
+                      <img src="./img/DANE__Geovisor__icon__settings_selected.svg" style="cursor: pointer;" width="20" height="20" alt="icono-consultas-seleccionada" class="icon-tool-selected">                    
+                  </div>
+                  <p class="center">Herramientas</p>
+                </div>
+              </div>
+
+              <div class="body">
+                
+                
+                <!-- <p class="titulo_seccion"><span class="DANE__Geovisor__icon__note"></span> Acerca</p>
+
+                <p id="description"></p> -->
+
+                <!-- <p class="titulo_seccion"><span class="DANE__Geovisor__icon__filter"></span> Filtro</p> -->
+
+                <div class="tools__panel seccion" id="filtroubicacion">
+                  <p class="tools__text">Realice la selección geográfica que desea ver en el mapa</p>  
+                  <div class="selectBox">
+                    <p class="selectBox__name">Departamento:</p>
+                    <select id="departamento" class="select2-container">
+                      <option value="">Seleccione...</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="tools__panel seccion mun" id="filtroubicacionmunicipio">  
+                  <div class="selectBox">
+                    <p class="selectBox__name">Municipio:</p>
+                    <select id="municipio" class="select2-container">
+                      <option value="">Seleccione...</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- <div class="seccion" id="filtroubicacion">
+                  <p>Departamento</p>
+                  <select id="departamento">
+                    <option value="">Seleccione...</option>
+                  </select>
+                </div> -->
+                <!-- <div class="seccion mun">
+                  <p>Municipio</p>
+                  <select id="municipio">
+                    <option>Seleccione...</option>
+                  </select>
+                </div> -->
+          
+                <!-- <p class="seccion-inactive titulo_seccion"><span class="DANE__Geovisor__icon__List"></span> Capas</p> -->
+          
+                <div class="seccion grupo-capas seccion-active" id="temascapas">
+                  
+                  <div id="layers"></div>
+
+          
+                </div>
+
+
+                
+          
+                <div id="basemaps" class="seccion"></div>  
+
+                <!-- <div id="estadisticas"></div> -->
+
+        
+        
+              </div>
+
+            </div>
+
+
+          </ul>
+        </div>
+      </nav>
+      <div class="Header__container">
+        <div class="Header__container__logo">
+            <a rel="noreferrer" title="Geoportal DANE Logo" href="https://www.dane.gov.co/" class="Header__container__logo__link" target="_blank">                
+                <img class="DANE__Geovisor__icon__logoDANE__01" src="https://geoportal.dane.gov.co/src/images/general/LogoDANE_Nuevo.svg" id="logo"alt="logo-dane"></img>
+            </a>
+        </div>
+        <h3 class="Header__container__geoportal">
+            <a rel="noreferrer" title="Geoportal DANE Logo" href="https://geoportal.dane.gov.co/" target="_blank" class="Header__container__geoportal__link">
+              <img class="DANE__Geovisor__icon__logoDANE__01" src="./img/DANE__Geovisor__icon__logoGeoportal.svg" id="logo"alt="logo-dane"></img>
+            </a>
+        </h3>        
+        <div class="Header__textBox">          
+          <p class="Header__textBox__title" id="titulo_visor"></p>
+      </div>
+      <!-- <div class="search">
+        <input
+            class="search__input"
+            placeholder='Búsqueda por lugar de Interés'
+        />
+        <button class="search__btn" aria-label="Justify" id="search__btn">
+            <span class="DANE__Geovisor__icon__search"></span>
+        </button>
+    </div> -->
+    </div>
+    </div>
+
+    
+
+    <div id="loader"></div>
+    <div id="background"></div>
+    <div id="leyenda"></div>
+    <div id="mapa">
+      
+    </div>
+
+  </div>
+  
+
+  
+
+</body>
+
+
+
+
+
+
+
+</html>
