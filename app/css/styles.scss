@@ -316,7 +316,7 @@ $color4:#881143;
   cursor: pointer;
   margin: 3px;
   display: none;
-  height: 13vh;
+  height: 10vh;
   overflow: hidden;
   text-overflow: ellipsis;
   //@include calc(width, "33% - 10px");
@@ -338,7 +338,10 @@ $color4:#881143;
       width: 50%;
   }
 }
-
+.filter__thematicGroup__name {
+  color: #666666;          
+  text-align: center;
+}
 .filter__thematicGroup__item .tooltiptext {
   visibility: hidden;
   width: 120px;

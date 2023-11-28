@@ -44,7 +44,7 @@ const Layers=()=> {
                       <span class= {`${variables[layer].icono} icon-span`}></span>
                     </div>
                     <span class="tooltiptext">{variables[layer].descripcion}</span>
-                    <p class="filter__thematicGroup__name">{variables[layer].descripcion}</p>                    
+                    <p class="filter__thematicGroup__name">{variables[layer].tituloTema}</p>                    
                   </li>
                 )}
                 <div class="filter__thematicGroup__more" id="ver__mas">
