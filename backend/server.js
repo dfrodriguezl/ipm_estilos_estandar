@@ -92,7 +92,6 @@ app.get("/select/:nombre/:x/:y/:z.pbf", function (req, res) {
       console.log(err)
       res.status(400)
     } else {
-      //console.log(mvt.rows[0].st_asmvt)
       res.setHeader('Access-Control-Allow-Origin', '*');
       res.setHeader('Content-Type', 'application/x-protobuf')
       fs.writeFileSync("foo.pbf", mvt.rows[0].st_asmvt);

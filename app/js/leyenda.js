@@ -7,7 +7,7 @@ const Leyenda=({layer})=> {
     // Declare a new state variable, which we'll call "count"
   const [count, setCount] = React.useState(0);
 
-  console.log(layer)
+  console.log("LAYER", layer)
   
     return (
       <div>

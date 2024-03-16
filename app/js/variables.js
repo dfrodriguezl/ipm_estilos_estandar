@@ -23,8 +23,8 @@ export const variables= {
         service: 'servicio1',
         hijos: "layer5",
         active: true,
-        zMin: 7,
-        zMax:13
+        zMin: 3,
+        zMax:11
     },
     layer2: {
         rangos: [0,0, 0.2, 0.4, 0.6, 0.8,1], 
@@ -43,8 +43,8 @@ export const variables= {
         service: 'servicio1',
         hijos: "layer6",
         active: false,
-        zMin: 7,
-        zMax:13
+        zMin: 3,
+        zMax:11
     },
     layer3: {
         rangos: [0,0, 0.2, 0.4, 0.6, 0.8,1], 
@@ -63,8 +63,8 @@ export const variables= {
         service: 'servicio1',
         hijos: "layer7",
         active: false,
-        zMin: 7,
-        zMax:13
+        zMin: 3,
+        zMax:11
     },
     layer4: {
         rangos: [0,0, 0.2, 0.4, 0.6, 0.8,1], 
@@ -83,81 +83,81 @@ export const variables= {
         service: 'servicio1',
         hijos: "layer8",
         active: false,
-        zMin: 7,
-        zMax:13
+        zMin: 3,
+        zMax:11
     },
-    layer5: {
-        rangos: [0,0, 0.2, 0.4, 0.6, 0.8,1], 
-        id: 5,
-        icono:'',
-        coloricon: '--backgroundAlternative020 --colorWhite',
-        colores: ['#FDD178', '#F8BA6C', '#F3A460', '#EF8E55', '#EA7749','#E5613D','#E14B32'],
-        labels: ['0%', '0.1% al 20%', '20.1% al 40%', '40.1% al 60%', '60.1% al 80%','Mayor al 80%'],
-        titulo: "RF_CENSO",
-        descripcion:"Predicción de IPM usando covariados censales a través del modelo Random Forest.",
-        columna: 2,
-        tabla: "ipm_urbano",
-        url_backend: `manzana/{x}/{y}/{z}.pbf`,
-        pk_backend: "manz_ccnct",
-        service: 'servicio2',
-        active: true,
-        zMin: 11,
-        zMax:15
-    },
-    layer6: {
-        rangos: [0,0, 0.2, 0.4, 0.6, 0.8,1], 
-        id: 6,
-        icono:'',
-        coloricon: '--backgroundAlternative020 --colorWhite',
-        colores: ['#E6FF96', '#C7E484', '#A8C972', '#8AAF61', '#6B944F','#4C793D','#2E5F2C'],
-        labels: ['0%', '0.1% al 20%', '20.1% al 40%', '40.1% al 60%', '60.1% al 80%','Mayor al 80%'],
-        titulo: "GBTR_CENSO",
-        descripcion:"Predicción de IPM usando covariados censales a través del modelo Gradient-boosted tree regression. ",
-        columna: 3,
-        tabla: "ipm_urbano",
-        url_backend: `manzana/{x}/{y}/{z}.pbf`,
-        pk_backend: "manz_ccnct",
-        service: 'servicio2',
-        active: false,
-        zMin: 11,
-        zMax:15
-    },
-    layer7: {
-        rangos: [0,0, 0.2, 0.4, 0.6, 0.8,1], 
-        id: 7,
-        icono:'',
-        coloricon: '--backgroundAlternative020 --colorWhite',
-        colores: ['#96FFF5', '#86DBDC', '#76B8C3', '#6795AA', '#577291','#474F78','#382C5F'],
-        labels: ['0%', '0.1% al 20%', '20.1% al 40%', '40.1% al 60%', '60.1% al 80%','Mayor al 80%'],
-        titulo: "GBTR_DIRECTAS",
-        descripcion:"Predicción de IPM usando covariados extraídos de imágenes satelitales  mediante redes neuronales convolucionales a través del modeloGradient-boosted tree regression.",
-        columna: 5,
-        tabla: "ipm_urbano",
-        url_backend: `manzana/{x}/{y}/{z}.pbf`,
-        pk_backend: "manz_ccnct",
-        service: 'servicio2',
-        active: false,
-        zMin: 11,
-        zMax:15
-    },
-    layer8: {
-        rangos: [0,0, 0.2, 0.4, 0.6, 0.8,1], 
-        id: 8,
-        icono:'',
-        coloricon: '--backgroundAlternative020 --colorWhite',
-        colores: ['#CEA0E1', '#B986C1', '#A56DA2', '#915382', '#7D3A63','#692043','#550724'],
-        labels: ['0%', '0.1% al 20%', '20.1% al 40%', '40.1% al 60%', '60.1% al 80%','Mayor al 80%'],
-        titulo: "RF_DIRECTAS",
-        descripcion:"Predicción de IPM usando covariados extraídos de imágenes satelitales  mediante redes neuronales convolucionales a través del modelo Random Forest.",
-        columna: 6,
-        tabla: "ipm_urbano",
-        url_backend: `manzana/{x}/{y}/{z}.pbf`,
-        pk_backend: "manz_ccnct",
-        service: 'servicio2',
-        active: false,
-        zMin: 11,
-        zMax:15
-    },
+    // layer5: {
+    //     rangos: [0,0, 0.2, 0.4, 0.6, 0.8,1], 
+    //     id: 5,
+    //     icono:'',
+    //     coloricon: '--backgroundAlternative020 --colorWhite',
+    //     colores: ['#FDD178', '#F8BA6C', '#F3A460', '#EF8E55', '#EA7749','#E5613D','#E14B32'],
+    //     labels: ['0%', '0.1% al 20%', '20.1% al 40%', '40.1% al 60%', '60.1% al 80%','Mayor al 80%'],
+    //     titulo: "RF_CENSO",
+    //     descripcion:"Predicción de IPM usando covariados censales a través del modelo Random Forest.",
+    //     columna: 2,
+    //     tabla: "ipm_urbano",
+    //     url_backend: `manzana/{x}/{y}/{z}.pbf`,
+    //     pk_backend: "manz_ccnct",
+    //     service: 'servicio2',
+    //     active: true,
+    //     zMin: 11,
+    //     zMax:15
+    // },
+    // layer6: {
+    //     rangos: [0,0, 0.2, 0.4, 0.6, 0.8,1], 
+    //     id: 6,
+    //     icono:'',
+    //     coloricon: '--backgroundAlternative020 --colorWhite',
+    //     colores: ['#E6FF96', '#C7E484', '#A8C972', '#8AAF61', '#6B944F','#4C793D','#2E5F2C'],
+    //     labels: ['0%', '0.1% al 20%', '20.1% al 40%', '40.1% al 60%', '60.1% al 80%','Mayor al 80%'],
+    //     titulo: "GBTR_CENSO",
+    //     descripcion:"Predicción de IPM usando covariados censales a través del modelo Gradient-boosted tree regression. ",
+    //     columna: 3,
+    //     tabla: "ipm_urbano",
+    //     url_backend: `manzana/{x}/{y}/{z}.pbf`,
+    //     pk_backend: "manz_ccnct",
+    //     service: 'servicio2',
+    //     active: false,
+    //     zMin: 11,
+    //     zMax:15
+    // },
+    // layer7: {
+    //     rangos: [0,0, 0.2, 0.4, 0.6, 0.8,1], 
+    //     id: 7,
+    //     icono:'',
+    //     coloricon: '--backgroundAlternative020 --colorWhite',
+    //     colores: ['#96FFF5', '#86DBDC', '#76B8C3', '#6795AA', '#577291','#474F78','#382C5F'],
+    //     labels: ['0%', '0.1% al 20%', '20.1% al 40%', '40.1% al 60%', '60.1% al 80%','Mayor al 80%'],
+    //     titulo: "GBTR_DIRECTAS",
+    //     descripcion:"Predicción de IPM usando covariados extraídos de imágenes satelitales  mediante redes neuronales convolucionales a través del modeloGradient-boosted tree regression.",
+    //     columna: 5,
+    //     tabla: "ipm_urbano",
+    //     url_backend: `manzana/{x}/{y}/{z}.pbf`,
+    //     pk_backend: "manz_ccnct",
+    //     service: 'servicio2',
+    //     active: false,
+    //     zMin: 11,
+    //     zMax:15
+    // },
+    // layer8: {
+    //     rangos: [0,0, 0.2, 0.4, 0.6, 0.8,1], 
+    //     id: 8,
+    //     icono:'',
+    //     coloricon: '--backgroundAlternative020 --colorWhite',
+    //     colores: ['#CEA0E1', '#B986C1', '#A56DA2', '#915382', '#7D3A63','#692043','#550724'],
+    //     labels: ['0%', '0.1% al 20%', '20.1% al 40%', '40.1% al 60%', '60.1% al 80%','Mayor al 80%'],
+    //     titulo: "RF_DIRECTAS",
+    //     descripcion:"Predicción de IPM usando covariados extraídos de imágenes satelitales  mediante redes neuronales convolucionales a través del modelo Random Forest.",
+    //     columna: 6,
+    //     tabla: "ipm_urbano",
+    //     url_backend: `manzana/{x}/{y}/{z}.pbf`,
+    //     pk_backend: "manz_ccnct",
+    //     service: 'servicio2',
+    //     active: false,
+    //     zMin: 11,
+    //     zMax:15
+    // },
 
 
 /* nuevas capas */
@@ -180,27 +180,27 @@ export const variables= {
         service: 'servicio1',
         hijos: "layer10",
         active: false,
-        zMin: 7,
-        zMax:13
+        zMin: 3,
+        zMax:11
     },
-    layer10: {
-        rangos: [0,0, 0.2, 0.4, 0.6, 0.8,1], 
-        id: 10,
-        icono:'',
-        coloricon: '--backgroundAlternative011 --colorWhite',
-        colores: ['#2ADF80', '#26BA7A', '#229675', '#1E7270', '#1A4E6B','#162A66','#130661'],
-        labels: ['0%', '0.1% al 20%', '20.1% al 40%', '40.1% al 60%', '60.1% al 80%','Mayor al 80%'],
-        titulo: "RF_DIR_MONTE_media",
-        descripcion:"Predicción de IPM usando covariados extraídos de imágenes satelitales mediante redes neuronales convolucionales a través del modelo Random Forest simulado por método de Montecarlo.",
-        columna: 4,
-        tabla: "ipm_urbano",
-        url_backend: `manzana/{x}/{y}/{z}.pbf`,
-        pk_backend: "manz_ccnct",
-        service: 'servicio2',
-        active: false,
-        zMin: 11,
-        zMax:15
-    },
+    // layer10: {
+    //     rangos: [0,0, 0.2, 0.4, 0.6, 0.8,1], 
+    //     id: 10,
+    //     icono:'',
+    //     coloricon: '--backgroundAlternative011 --colorWhite',
+    //     colores: ['#2ADF80', '#26BA7A', '#229675', '#1E7270', '#1A4E6B','#162A66','#130661'],
+    //     labels: ['0%', '0.1% al 20%', '20.1% al 40%', '40.1% al 60%', '60.1% al 80%','Mayor al 80%'],
+    //     titulo: "RF_DIR_MONTE_media",
+    //     descripcion:"Predicción de IPM usando covariados extraídos de imágenes satelitales mediante redes neuronales convolucionales a través del modelo Random Forest simulado por método de Montecarlo.",
+    //     columna: 4,
+    //     tabla: "ipm_urbano",
+    //     url_backend: `manzana/{x}/{y}/{z}.pbf`,
+    //     pk_backend: "manz_ccnct",
+    //     service: 'servicio2',
+    //     active: false,
+    //     zMin: 11,
+    //     zMax:15
+    // },
     layer11: {
         rangos: [0,0, 0.2, 0.4, 0.6, 0.8,1], 
         id: 11,
@@ -218,29 +218,30 @@ export const variables= {
         service: 'servicio1',
         hijos: "layer12",
         active: false,
-        zMin: 7,
-        zMax:13
+        zMin: 3,
+        zMax:11
     },
-    layer12: {
-        rangos: [0,0, 0.2, 0.4, 0.6, 0.8,1], 
-        id: 12,
-        icono:'',
-        coloricon: '--backgroundAlternative020 --colorWhite',
-        colores: ['#D6DF2A', '#C2BF24', '#AFA01E', '#9B8118', '#886212','#74430C','#612406'],
-        labels: ['0%', '0.1% al 20%', '20.1% al 40%', '40.1% al 60%', '60.1% al 80%','Mayor al 80%'],
-        titulo: "GBTR_DIR_MONTE_media",
-        descripcion:"Predicción de IPM usando covariados extraídos de imágenes satelitales mediante redes neuronales convolucionales a través del modeloGradient-boosted tree regressionsimulado por método de Montecarlo. ",
-        columna: 7,
-        tabla: "ipm_urbano",
-        url_backend: `manzana/{x}/{y}/{z}.pbf`,
-        pk_backend: "manz_ccnct",
-        service: 'servicio2',
-        active: false,
-        zMin: 11,
-        zMax:15
-    },
+    // layer12: {
+    //     rangos: [0,0, 0.2, 0.4, 0.6, 0.8,1], 
+    //     id: 12,
+    //     icono:'',
+    //     coloricon: '--backgroundAlternative020 --colorWhite',
+    //     colores: ['#D6DF2A', '#C2BF24', '#AFA01E', '#9B8118', '#886212','#74430C','#612406'],
+    //     labels: ['0%', '0.1% al 20%', '20.1% al 40%', '40.1% al 60%', '60.1% al 80%','Mayor al 80%'],
+    //     titulo: "GBTR_DIR_MONTE_media",
+    //     descripcion:"Predicción de IPM usando covariados extraídos de imágenes satelitales mediante redes neuronales convolucionales a través del modeloGradient-boosted tree regressionsimulado por método de Montecarlo. ",
+    //     columna: 7,
+    //     tabla: "ipm_urbano",
+    //     url_backend: `manzana/{x}/{y}/{z}.pbf`,
+    //     pk_backend: "manz_ccnct",
+    //     service: 'servicio2',
+    //     active: false,
+    //     zMin: 11,
+    //     zMax:15
+    // },
     // url_servicios:'https://visores.dane.gov.co/visor-nuevo-ipm/datos/',
     url_servicios:'https://geoportal.dane.gov.co/ipm/api/datos/',
+    // url_servicios:'http://localhost:3000/',
     services: {
         servicio1: "ipm_r",
         servicio2:"ipm_u"  
@@ -263,7 +264,8 @@ export const variables= {
     imgHeader: "./img/dane.svg",
 
 }
-export const urlDeploy='https://geoportal.dane.gov.co/ipm/api/'
+export const urlDeploy='http://localhost:3000/'
+// export const urlDeploy='https://geoportal.dane.gov.co/ipm/api/'
 // export const urlDeploy='https://visores.dane.gov.co/backend/'
 //export const urlDeploy="https://visores.dane.gov.co/geovisor-coberturas/";
 // export const urlDeploy = 'https://geoportal.dane.gov.co/cobertura/';

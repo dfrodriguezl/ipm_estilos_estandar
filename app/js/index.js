@@ -28,21 +28,21 @@ import { defaults as defaultControls } from 'ol/control.js';
 import { get as getProjection } from 'ol/proj';
 
 import { servidorGetRaw } from '../js/request'
-import {service} from './services'
+import { service } from './services'
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import geometria from '../json/bbox.json'
 
 import Leyenda from './leyenda.js'
-import {Estadistica} from './estadisticas.js'
-import {MapaBase} from './basemap.js'
-import {Layers} from './layers.js'
+import { Estadistica } from './estadisticas.js'
+import { MapaBase } from './basemap.js'
+import { Layers } from './layers.js'
 
 
 import { getZip } from './csvtojson'
 
-import {variables,urlDeploy} from './variables'
+import { variables, urlDeploy } from './variables'
 
 import Load from './util'
 
@@ -51,8 +51,8 @@ import { Barras, Dona } from './graficos'
 import { jsPDF } from "jspdf";
 
 var cod = '25473'
-var clase='0'
-var nombre=''
+var clase = '0'
+var nombre = ''
 
 
 
@@ -108,7 +108,7 @@ var base = new TileLayer({
   })
 });
 
-ReactDOM.render(<MapaBase base={base }/>, document.getElementById('basemaps'));
+ReactDOM.render(<MapaBase base={base} />, document.getElementById('basemaps'));
 
 
 
@@ -140,7 +140,7 @@ for (var i = 0; i <= 8; ++i) {
 function tileUrlFunction_seleccion(tileCoord) {
 
   return (
-    urlDeploy + 'select/'+nombre+'/{x}/{y}/{z}.pbf'
+    urlDeploy + 'select/' + nombre + '/{x}/{y}/{z}.pbf'
   )
     .replace('{z}', String(tileCoord[0] * 2 - 1))
     .replace('{x}', String(tileCoord[1]))
@@ -180,7 +180,7 @@ const vectorTileSource = (tileFunc) => {
   });
 }
 
-const vectorTileLyr = (source,zindex,min,max) => {
+const vectorTileLyr = (source, zindex, min, max) => {
   return new VectorTileLayer({
     source: source,
     declutter: true,
@@ -194,25 +194,25 @@ const vectorTileLyr = (source,zindex,min,max) => {
 
 
 
-const depto_source = vectorTileSource(tileUrlFunction_depto)  
-const seleccion=vectorTileSource(tileUrlFunction_seleccion) 
+const depto_source = vectorTileSource(tileUrlFunction_depto)
+const seleccion = vectorTileSource(tileUrlFunction_seleccion)
 
 
-const mpio_source = new vectorTileSource(tileUrlFunction_mpio) 
+const mpio_source = new vectorTileSource(tileUrlFunction_mpio)
 
 
-const seleccion_mpio = vectorTileLyr(seleccion,4,1,20)
+const seleccion_mpio = vectorTileLyr(seleccion, 4, 1, 20)
 map.addLayer(seleccion_mpio);
 seleccion_mpio.set('id', 'seleccion_mpio')
 
 
-const mpio = vectorTileLyr(mpio_source,2,8,15)
+const mpio = vectorTileLyr(mpio_source, 2, 8, 15)
 map.addLayer(mpio);
 mpio.set('id', 'mpio')
 //mpio.setVisible(false)
 
 
-const depto = vectorTileLyr(depto_source,3,2,10)
+const depto = vectorTileLyr(depto_source, 3, 2, 10)
 map.addLayer(depto);
 depto.set('id', 'depto')
 //depto.setVisible(false)
@@ -279,10 +279,10 @@ depto.setStyle(function (feature) {
 
 
 const finishLoad = () => {
-  
+
 
   ReactDOM.unmountComponentAtNode(document.getElementById('loader'))
-  document.getElementById('background').style.display="none"
+  document.getElementById('background').style.display = "none"
 
 
 }
@@ -291,17 +291,17 @@ const finishLoad = () => {
 var tiles_arr = [];
 var layer_arr = [];
 var layer_id = [];
-var csv_arr=[]
+var csv_arr = []
 
 
 
 const servicios = async () => {
-  
+
   console.log("datos")
 
   //csv = await getZip(variables['layer' + i].csv);
 
-  var informacion= await service()
+  var informacion = await service()
 
   //console.log(informacion)
 
@@ -309,90 +309,90 @@ const servicios = async () => {
 
 
 
-for (var i = 1; i <= variables.layers.length ; i++){                                                                                                               
-  
-  var csv;
-  
-  async function getDatos(i) {
-    
-    console.log("hola")
+  for (var i = 1; i <= variables.layers.length; i++) {
 
-    console.log(variables['layer' + i].service)
+    var csv;
+
+    async function getDatos(i) {
+
+      console.log("hola")
+
+      console.log(variables['layer' + i].service)
+
+      csv = informacion[variables['layer' + i].service]
+
+
+      csv_arr[i] = csv
+
+      function tiles(tileCoord) {
+
+        return (
+          urlDeploy + variables['layer' + i].url_backend
+        )
+          .replace('{z}', String(tileCoord[0] * 2 - 1))
+          .replace('{x}', String(tileCoord[1]))
+          .replace('{y}', String(tileCoord[2]))
+      }
+
+
+
+      const source = vectorTileSource(tiles);
+
+      const layer = vectorTileLyr(source, 1, variables['layer' + i].zMin, variables['layer' + i].zMax);
+
+      layer_arr[i] = layer
+      layer_id[i] = 'layer' + i
+
+      map.addLayer(layer);
+      layer.set('id', 'layer' + i)
+
+
+      layer.setVisible(variables['layer' + i].active)
+
+
+
+      layer.setStyle(function (feature) {
+
+        var color = iterador(
+          csv_arr[i],
+          feature,
+          variables['layer' + i].columna,
+          variables['layer' + i].pk_backend,
+          variables['layer' + i].rangos,
+          variables['layer' + i].colores
+        );
+
+        return estilo(color)
+      });
+
+
+
+
+
+      /*
+     layer.setStyle(function (feature) {
     
-    csv = informacion[variables['layer' + i].service]
-    
+       var value=feature.get(variables['layer'+i].col_data)
        
-    csv_arr[i] = csv
-    
-    function tiles(tileCoord) {
-
-      return (
-        urlDeploy + variables['layer'+i].url_backend
-      )
-        .replace('{z}', String(tileCoord[0] * 2 - 1))
-        .replace('{x}', String(tileCoord[1]))
-        .replace('{y}', String(tileCoord[2]))
-    }
-  
-    
-    
-    const source = vectorTileSource(tiles); 
-  
-    const layer = vectorTileLyr(source,1,variables['layer'+i].zMin,variables['layer'+i].zMax);
-  
-    layer_arr[i]=layer
-    layer_id[i]='layer'+i
-    
-    map.addLayer(layer);
-    layer.set('id', 'layer' + i)
-    
-    
-    layer.setVisible(variables['layer' + i].active)
-    
-
-    
-    layer.setStyle(function (feature) {
-  
-      var color = iterador(
-        csv_arr[i] ,
-        feature,
-        variables['layer'+i].columna,
-        variables['layer'+i].pk_backend,
+      var color = getColor(
+        value,
         variables['layer'+i].rangos,
         variables['layer'+i].colores
       );
       
       return estilo(color)
-    });
-    
-    
+     });
+      */
 
 
+      finishLoad();
 
-    /*
-   layer.setStyle(function (feature) {
-  
-     var value=feature.get(variables['layer'+i].col_data)
-     
-    var color = getColor(
-      value,
-      variables['layer'+i].rangos,
-      variables['layer'+i].colores
-    );
-    
-    return estilo(color)
-   });
-    */
+    }
+
+    getDatos(i)
 
 
-    finishLoad();
-    
   }
-  
-  getDatos(i)
-
-
-}
 
 }
 
@@ -433,8 +433,8 @@ const iterador = (info, feature, columna, pk, array, colores) => {
     //console.log(newdata_mz[key])
 
     color = getColor(parseFloat(info[key][columna]), array, colores)
-    
-  
+
+
 
   }
   return color;
@@ -443,7 +443,7 @@ const iterador = (info, feature, columna, pk, array, colores) => {
 
 const estilo = (color) => {
 
-  if (color!=='transparent') {
+  if (color !== 'transparent') {
     return new Style({
       fill: new Fill({
         color: color
@@ -460,7 +460,7 @@ const estilo = (color) => {
       })
     });
   }
-  
+
 
 }
 
@@ -474,14 +474,12 @@ const sel_municipio = document.querySelector('#municipio');
 sel_municipio.addEventListener('change', (event) => {
 
   var value = sel_municipio.value;
-  console.log(value)
 
   cod = value;
 
-  nombre=sel_municipio.options[sel_municipio.selectedIndex].text;
-  console.log("NOMBRE", nombre);
+  nombre = sel_municipio.options[sel_municipio.selectedIndex].text;
 
-  
+
   var boundary = geometria[value];
 
   var ext = boundingExtent([[boundary[0][0], boundary[0][1]], [boundary[1][0], boundary[1][1]]]);
@@ -492,9 +490,12 @@ sel_municipio.addEventListener('change', (event) => {
 
     console.log(box)
 
-    var ext = boundingExtent([[box.st_xmin, box.st_ymin],[box.st_xmax, box.st_ymax]]);
+    var ext = boundingExtent([[box.st_xmin, box.st_ymin], [box.st_xmax, box.st_ymax]]);
 
     map.getView().fit(ext, map.getSize());
+    if(map.getView().getZoom() > 11){
+      map.getView().setZoom(11);
+    }
 
 
   })
@@ -502,22 +503,22 @@ sel_municipio.addEventListener('change', (event) => {
 
   ext = transformExtent(ext, 'EPSG:4326', 'EPSG:3857');
 
-  
-  seleccion_mpio.getSource().setUrl(urlDeploy + 'select/'+nombre+'/{x}/{y}/{z}.pbf'); 
+
+  seleccion_mpio.getSource().setUrl(urlDeploy + 'select/' + nombre + '/{x}/{y}/{z}.pbf');
   const aa = seleccion_mpio.getSource().getFeaturesInExtent();
-  
+
   seleccion_mpio.setStyle((feature) => {
     console.log("FEATURE", feature);
   })
 
- 
+
 
 });
 
 
 
 
-var highlightStyle=   new Style({
+var highlightStyle = new Style({
   stroke: new Stroke({
     color: '#fff',
     width: 2,
@@ -526,7 +527,7 @@ var highlightStyle=   new Style({
 
 
 var selection = {};
-var cambio=""
+var cambio = ""
 
 var selectedCountry = new Style({
   stroke: new Stroke({
@@ -562,43 +563,43 @@ map.on('singleclick', function (evt) {
   var id = "";
 
   let features = [];
-  let ids=[]
+  let ids = []
 
   var feature = map.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
 
     features.push(feature);
 
 
-    var id=layer.get('id')
+    var id = layer.get('id')
 
     ids.push(id)
 
 
 
-    if ( id!=='mpio' && id!=='depto' && id!=='seleccion_mpio') {
-        
+    if (id !== 'mpio' && id !== 'depto' && id !== 'seleccion_mpio') {
+
 
       var layer1 = id;
       console.log(id)
       var index = layer_id.indexOf(layer1)
-      
-      
-      selection={}
+
+
+      selection = {}
 
       var fid = feature.get(variables[id].pk_backend);
       selection[fid] = feature;
-      cambio=variables[id].pk_backend
+      cambio = variables[id].pk_backend
 
-      selectionLayer.setSource(layer.getSource())    
+      selectionLayer.setSource(layer.getSource())
       selectionLayer.changed();
 
 
 
     }
 
- 
-  
-  
+
+
+
 
 
 
@@ -609,46 +610,46 @@ map.on('singleclick', function (evt) {
 
 
   if (features !== []) {
-   
 
-    for (let l = 0; l < features.length; l++){
-      
+
+    for (let l = 0; l < features.length; l++) {
+
       let id = ids[l]
-      
-      if ( id!=='mpio' && id!=='depto' && id!=='seleccion_mpio') {
-        
 
-        var layer=id;
+      if (id !== 'mpio' && id !== 'depto' && id !== 'seleccion_mpio') {
+
+
+        var layer = id;
         var index = layer_id.indexOf(layer)
-            
+
         var info = csv_arr[index][features[l].get(variables[id].pk_backend)]
-        mensaje = "<p>Cod DANE: " + info[0] + "</p><p> " + variables[id].titulo + ' : ' + info[variables[id].columna] + "</p>"+mensaje
-        
+        mensaje = "<p>Cod DANE: " + info[0] + "</p><p> " + variables[id].titulo + ' : ' + info[variables[id].columna] + "</p>" + mensaje
+
 
       } else {
         if (id == "mpio") {
           var info = features[l].get("nombre_mpio")
-     
-          mensaje = "<p>Municipio: " + info + "</p>" +mensaje
+
+          mensaje = "<p>Municipio: " + info + "</p>" + mensaje
 
         } else if (id == "depto") {
 
           var info = features[l].get("nombre")
-          mensaje = "<p>Depto: " + info + "</p>"+mensaje
+          mensaje = "<p>Depto: " + info + "</p>" + mensaje
         }
       }
 
-       
+
 
     }
 
-    
+
 
   }
-  
 
 
-  
+
+
 
 
 
@@ -715,7 +716,7 @@ var prev_layer = "layer1";
 
 console.log(prev_layer)
 
-ReactDOM.render(<Leyenda layer={prev_layer}/>, document.getElementById('leyenda'));
+ReactDOM.render(<Leyenda layer={prev_layer} />, document.getElementById('leyenda'));
 
 const myFunction = (e) => {
 
@@ -723,7 +724,7 @@ const myFunction = (e) => {
   try {
 
     var index = layer_id.indexOf(prev_layer)
-    
+
     var hijo = variables[prev_layer].hijos
     var index_hijo = layer_id.indexOf(hijo)
 
@@ -731,22 +732,22 @@ const myFunction = (e) => {
     layer_arr[index_hijo].setVisible(false)
 
   } catch (err) {
-    
+
   }
 
- var layer=e.target.getAttribute("layer");
+  var layer = e.target.getAttribute("layer");
   activo = layer;
- var index = layer_id.indexOf(layer)
+  var index = layer_id.indexOf(layer)
 
   var hijo = variables[layer].hijos
   var index_hijo = layer_id.indexOf(hijo)
-  
-  layer_arr[index].setVisible(true)
-  layer_arr[index_hijo].setVisible(true)
-  
- prev_layer = layer;
 
- ReactDOM.render(<Leyenda layer={layer}/>, document.getElementById('leyenda'));
+  layer_arr[index].setVisible(true)
+  // layer_arr[index_hijo].setVisible(true)
+
+  prev_layer = layer;
+
+  ReactDOM.render(<Leyenda layer={layer} />, document.getElementById('leyenda'));
 
 }
 
@@ -764,7 +765,7 @@ var slider = document.getElementsByClassName('slider');
 
 const changeSlider = (e) => {
   const transparencia = e.target.value / 10
-  
+
   var layer = e.target.name;
   var index = layer_id.indexOf(layer)
   layer_arr[index].setOpacity(transparencia)
@@ -803,11 +804,11 @@ const getEstadistica = (valor, rangos) => {
 
 
 function onMoveEnd(evt) {
-  
+
   evt.stopPropagation();
   evt.preventDefault();
 
-  
+
 
 
 }
@@ -864,8 +865,8 @@ var buttons = document.querySelectorAll(".toggle-button");
 var modal = document.querySelector("#modal");
 
 
-[].forEach.call(buttons, function(button) {
-  button.addEventListener("click", function() {
+[].forEach.call(buttons, function (button) {
+  button.addEventListener("click", function () {
     modal.classList.toggle("off");
   })
 });
@@ -875,4 +876,4 @@ var modal = document.querySelector("#modal");
 document.getElementById('titulo_visor').innerHTML = variables.title;
 document.getElementById('description').innerHTML = variables.description;
 
-document.getElementById('logo-presidente').src=variables.imgFooter
+document.getElementById('logo-presidente').src = variables.imgFooter
