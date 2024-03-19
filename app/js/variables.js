@@ -264,8 +264,8 @@ export const variables= {
     imgHeader: "./img/dane.svg",
 
 }
-export const urlDeploy='http://localhost:3000/'
-// export const urlDeploy='https://geoportal.dane.gov.co/ipm/api/'
+// export const urlDeploy='http://localhost:3000/'
+export const urlDeploy='https://geoportal.dane.gov.co/ipm/api/'
 // export const urlDeploy='https://visores.dane.gov.co/backend/'
 //export const urlDeploy="https://visores.dane.gov.co/geovisor-coberturas/";
 // export const urlDeploy = 'https://geoportal.dane.gov.co/cobertura/';
