@@ -38,7 +38,7 @@ import Leyenda from './leyenda.js'
 import { Estadistica } from './estadisticas.js'
 import { MapaBase } from './basemap.js'
 import { Layers } from './layers.js'
-
+import { Descarga } from './descarga.js'
 
 import { getZip } from './csvtojson'
 
@@ -109,6 +109,7 @@ var base = new TileLayer({
 });
 
 ReactDOM.render(<MapaBase base={base} />, document.getElementById('basemaps'));
+ReactDOM.render(<Descarga />, document.getElementById('descarga'));
 
 
 

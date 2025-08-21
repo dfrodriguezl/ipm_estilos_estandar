@@ -81,6 +81,7 @@ $(document).ready(function(){
         $("#ayuda").removeClass("container-tool-active");
         $("#temascapas").removeClass("seccion-active");
         $("#basemaps").toggleClass("seccion-active");
+        $("#descarga").toggleClass("seccion-active");
         $("#filtroubicacion").removeClass("seccion-active");
         $("#filtroubicacionmunicipio").hide();
         $("#modal1").removeClass("seccion-active");
