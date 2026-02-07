@@ -3,7 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const WebpackProvideGlobalPlugin = require('webpack-provide-global-plugin');
-
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 
 // var webpack = require('webpack');
@@ -109,10 +109,16 @@ module.exports = {
 
 plugins: [
 
-      new HtmlWebpackPlugin({  
+      new HtmlWebpackPlugin({
         filename: './index.html',
         template: './app/index.html',
         chunks: ["index"]
+      }),
+      new CopyWebpackPlugin({
+        patterns: [
+          { from: 'app/robots.txt', to: 'robots.txt' },
+          { from: 'app/sitemap.xml', to: 'sitemap.xml' }
+        ]
       }),
       new MiniCSSExtractPlugin({
         filename: 'css/[name].css',

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://geoportal.dane.gov.co/ipm/sitemap.xml
