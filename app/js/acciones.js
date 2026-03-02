@@ -12,32 +12,35 @@ $(document).ready(function(){
     // });    
     
 
-    $('#rapida').click(function(){
-        $("#guide").toggleClass("tab-visible");
-        $("#messages").removeClass("tab-visible");
-        $("#settings").removeClass("tab-visible");
-        $("#rapida__1").toggleClass("tab-active");
-        $("#acerca__1").removeClass("tab-active");
-        $("#contacto__1").removeClass("tab-active");
-    })
+    const $panes = $("#video, #guide, #messages, #settings");
+    const $tabs = $("#video__1, #rapida__1, #acerca__1, #contacto__1");
 
-    $('#acerca').click(function(){
-        $("#messages").toggleClass("tab-visible");
-        $("#guide").removeClass("tab-visible");
-        $("#settings").removeClass("tab-visible");
-        $("#acerca__1").toggleClass("tab-active");
-        $("#rapida__1").removeClass("tab-active");
-        $("#contacto__1").removeClass("tab-active");
-    })
+    const showTab = (paneId, tabId) => {
+        $panes.removeClass("tab-visible");
+        $("#" + paneId).addClass("tab-visible");
+        $tabs.removeClass("tab-active");
+        $("#" + tabId).addClass("tab-active");
+    };
 
-    $('#contacto').click(function(){
-        $("#settings").toggleClass("tab-visible");
-        $("#messages").removeClass("tab-visible");
-        $("#guide").removeClass("tab-visible");
-        $("#contacto__1").toggleClass("tab-active");
-        $("#acerca__1").removeClass("tab-active");
-        $("#rapida__1").removeClass("tab-active");
-    })
+    $("#video-tab").on("click", function (e) {
+        e.preventDefault();
+        showTab("video", "video__1");
+    });
+
+    $("#guia-rapida-tab").on("click", function (e) {
+        e.preventDefault();
+        showTab("guide", "rapida__1");
+    });
+
+    $("#acerca").on("click", function (e) {
+        e.preventDefault();
+        showTab("messages", "acerca__1");
+    });
+
+    $("#contacto").on("click", function (e) {
+        e.preventDefault();
+        showTab("settings", "contacto__1");
+    });
 
     $('#ayuda').click(function(){
         $("#ayuda").toggleClass("container-tool-active");
