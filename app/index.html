@@ -79,7 +79,11 @@
           <div class="modal-body">
     
             <ul class="nav nav-tabs" id="myTab" role="tablist">
-              <li class="nav-item tab tab-active" id="rapida__1">
+              <li class="nav-item tab tab-active" id="video__1">
+                <a class="nav-link tab-text" data-toggle="tab" role="tab" id="rapida" aria-controls="video"><i class="fa fa-bars"></i>
+                  Video</a>
+              </li>
+              <li class="nav-item tab" id="rapida__1">
                 <a class="nav-link tab-text" data-toggle="tab" role="tab" id="rapida" aria-controls="guide"><i class="fa fa-bars"></i>
                   Guía rápida</a>
               </li>
@@ -94,7 +98,12 @@
             </ul>
     
             <div class="tab-content">    
-              <div class="tab-pane tab-visible" id="guide" role="tabpanel">
+              <div class="tab-pane tab-visible" id="video" role="tabpanel">
+                <div style="max-height: 70vh; overflow: auto;">
+                  <img src="https://geoportal.dane.gov.co/descargas/videos/GIF_GEOVISOR_ESTIMACIONES_IPM.gif" alt="Video guía Geovisor estimaciones IPM" style="max-width: 100%; height: auto; display: block;"/>
+                </div>
+              </div>
+              <div class="tab-pane id="guide" role="tabpanel">
                 <img id="img" src="https://geoportal.dane.gov.co/descargas/ayudas/ayuda_ipm.webp" />
               </div>
               <div class="tab-pane" id="messages" role="tabpanel">
