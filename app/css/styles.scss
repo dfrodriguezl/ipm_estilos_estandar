@@ -30,6 +30,15 @@ $color4:#881143;
   height:calc(100vh - 60px);
 
 }
+
+#mapa[data-basemap="gris"] .basemap-layer {
+  filter: saturate(0) contrast(0.85) brightness(1.15);
+}
+
+#mapa[data-basemap="dark"] .basemap-layer {
+  filter: saturate(0) contrast(1.45) brightness(0.35);
+}
+
 #background{
   position: absolute;
   width: 100%;

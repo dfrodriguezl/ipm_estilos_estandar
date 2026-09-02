@@ -1,3 +1,5 @@
+const googleMapsApiKey = 'AIzaSyAOha4Su8EqOFQfDE8NjrS_KdSHfu50WkA';
+
 export const variables= {
     
     title: 'Geovisor estimaciones IPM',
@@ -255,10 +257,11 @@ export const variables= {
     //     'normal':'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}?access_token='
     // },
     baseMaps: {
-        'gris': 'http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
-        'dark': 'http://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-        'normal': 'https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}'  
+        'gris': `google://roadmap/{z}/{x}/{y}?key=${googleMapsApiKey}`,
+        'dark': `google://satellite/{z}/{x}/{y}?key=${googleMapsApiKey}&layerType=layerRoadmap`,
+        'normal': `google://roadmap/{z}/{x}/{y}?key=${googleMapsApiKey}`,
     },
+    baseMapCheck: 'normal',
 
     imgFooter: "./img/logo-presidencia.svg",
     imgHeader: "./img/dane.svg",

@@ -43,6 +43,7 @@ import { Descarga } from './descarga.js'
 import { getZip } from './csvtojson'
 
 import { variables, urlDeploy } from './variables'
+import { applyBasemapFilter, createBasemapSource } from './googleTilesProtocol'
 
 import Load from './util'
 
@@ -99,13 +100,9 @@ var overlay = new Overlay({
 
 
 
-var key = variables.key;
-
 var base = new TileLayer({
-  source: new XYZ({
-    url: variables.baseMaps.normal + key,
-    crossOrigin: "Anonymous"
-  })
+  className: 'ol-layer basemap-layer',
+  source: createBasemapSource(variables.baseMapCheck || 'normal'),
 });
 
 ReactDOM.render(<MapaBase base={base} />, document.getElementById('basemaps'));
@@ -126,6 +123,8 @@ const map = new Map({
     multiWorld: true,
   })
 });
+
+applyBasemapFilter(variables.baseMapCheck || 'normal');
 
 
 var resolutions = [];

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {variables} from './variables'
-import XYZ from 'ol/source/XYZ';
+import { applyBasemapFilter, createBasemapSource } from './googleTilesProtocol'
 
 
 const Check = () => {
@@ -15,24 +15,25 @@ const Check = () => {
 
 const MapaBase = ({base}) => {
     
-  const [active, SetActive] = React.useState('normal');
-
-  const baseMaps = variables.baseMaps;
-  var key = variables.key;
- 
+  const [active, SetActive] = React.useState(variables.baseMapCheck || 'normal');
 
   const handleClick = (mapa) => {
-    console.log(mapa)
+    if (!mapa || mapa === active) return;
+    if (!variables.baseMaps || !Object.prototype.hasOwnProperty.call(variables.baseMaps, mapa)) {
+      return;
+    }
 
-    base.setSource(
-      new XYZ({
-        url: baseMaps[mapa]+key,
-        crossOrigin: "Anonymous"
-      })
-    )
+    base.setSource(createBasemapSource(mapa));
+    applyBasemapFilter(mapa);
+    variables.baseMapCheck = mapa;
+    SetActive(mapa);
+  };
 
-    SetActive(mapa)
-
+  const handleKeyDown = (event, mapa) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleClick(mapa);
+    }
   };
 
     return (
@@ -44,17 +45,41 @@ const MapaBase = ({base}) => {
           
         <div class="grupo-base">
           
-          <div class="elemento" onClick={()=>handleClick('normal')}>
+          <div
+            class="elemento"
+            role="button"
+            tabIndex="0"
+            aria-label="Mapa base normal"
+            aria-pressed={active === 'normal'}
+            onClick={()=>handleClick('normal')}
+            onKeyDown={(event)=>handleKeyDown(event, 'normal')}
+          >
             {active=='normal'?<Check />:''}
                   <img src="./img/normal.png" alt=""/>
           </div>
           
-          <div class="elemento" onClick={()=>handleClick('gris')}>
+          <div
+            class="elemento"
+            role="button"
+            tabIndex="0"
+            aria-label="Mapa base gris"
+            aria-pressed={active === 'gris'}
+            onClick={()=>handleClick('gris')}
+            onKeyDown={(event)=>handleKeyDown(event, 'gris')}
+          >
           {active=='gris'?<Check />:''}
                   <img src="./img/gris.png" alt=""/>
           </div>
           
-          <div class="elemento" onClick={()=>handleClick('dark')}>
+          <div
+            class="elemento"
+            role="button"
+            tabIndex="0"
+            aria-label="Mapa base oscuro"
+            aria-pressed={active === 'dark'}
+            onClick={()=>handleClick('dark')}
+            onKeyDown={(event)=>handleKeyDown(event, 'dark')}
+          >
           {active=='dark'?<Check />:''}
                   <img src="./img/dark.png" alt=""/>
             </div>
